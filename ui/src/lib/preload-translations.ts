@@ -1,7 +1,7 @@
 import { LanguageCode, loadTranslations } from '@/lib/i18n';
 
 // Preload common languages in the background
-export async function preloadTranslations(languages: LanguageCode[] = ['en', 'hi', 'ko']) {
+export async function preloadTranslations(languages: LanguageCode[] = ['en', 'ko', 'ru']) {
 	const preloadPromises = languages.map(async (lang) => {
 		try {
 			await loadTranslations(lang);
