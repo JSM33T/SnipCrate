@@ -13,9 +13,11 @@ const eslintConfig = [
 	...compat.extends('next/core-web-vitals', 'next/typescript'),
 	{
 		rules: {
+
 			strict: ["error", "global"],
 			indent: ["error", "tab", { SwitchCase: 1 }],
-			"no-tabs": ["error", { allowIndentationTabs: true }]
+			"no-tabs": ["error", { allowIndentationTabs: true }],
+			"no-unused-vars": ["off"]
 		},
 	},
 ];
