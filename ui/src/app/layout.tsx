@@ -29,8 +29,8 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-	title: "DevStash - Modern Web Application",
-	description: "A modern web application built with Next.js and shadcn/ui",
+	title: "SnipCrate - A community snippet repository",
+	description: "Discover, share, and manage code snippets with ease.",
 };
 
 export default function RootLayout({

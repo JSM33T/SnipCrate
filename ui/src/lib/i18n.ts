@@ -3,16 +3,6 @@ export const languages = {
 		code: 'en',
 		name: 'English',
 		flag: '🇺🇸'
-	},
-	ko: {
-		code: 'ko',
-		name: '한국어',
-		flag: '🇰🇷'
-	},
-	ru: {
-		code: 'ru',
-		name: 'Русский',
-		flag: '🇷🇺'
 	}
 } as const;
 

@@ -57,7 +57,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
 			if (typeof window !== 'undefined') {
 				const stored = localStorage.getItem(LANGUAGE_STORAGE_KEY) as LanguageCode;
-				if (stored && ['en', 'hi', 'ko'].includes(stored)) {
+				if (stored && ['en'].includes(stored)) {
 					initialLanguage = stored;
 				}
 			}

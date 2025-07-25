@@ -18,7 +18,7 @@ const en: Translations = {
 
 	// About page
 	aboutUs: 'About Us',
-	aboutDescription: 'Learn more about our company and mission',
+	aboutDescription: 'Learn more about SnipCrate, our mission, and the team behind it.',
 
 	// FAQ
 	frequentlyAskedQuestions: 'Frequently Asked Questions',
@@ -28,16 +28,16 @@ const en: Translations = {
 	// FAQ Items
 	faqItems: [
 		{
-			question: 'What is FrenCircle?',
-			answer: 'FrenCircle is a modern social platform designed to help you connect and collaborate with friends, family, and communities. We provide tools for sharing, communication, and building meaningful relationships in a safe digital environment.'
+			question: 'What is ?',
+			answer: 'SnipCrate is a modern social platform designed to help you connect and collaborate with friends, family, and communities. We provide tools for sharing, communication, and building meaningful relationships in a safe digital environment.'
 		},
 		{
 			question: 'How do I create an account?',
 			answer: 'Creating an account is easy! Click on the "Sign Up" button, provide your email address, create a secure password, and verify your email. You can also sign up using your Google or Facebook account for faster registration.'
 		},
 		{
-			question: 'Is FrenCircle free to use?',
-			answer: 'Yes, FrenCircle offers a comprehensive free plan that includes basic features like creating profiles, joining circles, and connecting with friends. We also offer premium plans with advanced features like unlimited storage, priority support, and exclusive tools.'
+			question: 'Is SnipCrate free to use?',
+			answer: 'Yes, SnipCrate offers a comprehensive free plan that includes basic features like creating profiles, joining circles, and connecting with friends. We also offer premium plans with advanced features like unlimited storage, priority support, and exclusive tools.'
 		},
 		{
 			question: 'How do I join a circle?',
@@ -49,7 +49,7 @@ const en: Translations = {
 		},
 		{
 			question: 'What privacy controls are available?',
-			answer: 'FrenCircle provides comprehensive privacy controls. You can make your profile public or private, control who can message you, manage circle visibility, block unwanted users, and customize what information is shared with others.'
+			answer: 'SnipCrate provides comprehensive privacy controls. You can make your profile public or private, control who can message you, manage circle visibility, block unwanted users, and customize what information is shared with others.'
 		},
 		{
 			question: 'How do I report inappropriate content?',
@@ -61,16 +61,16 @@ const en: Translations = {
 		},
 		{
 			question: 'How do I contact customer support?',
-			answer: 'You can reach our support team through the Help Center, email us at support@frencircle.com, or use the live chat feature available 24/7. Premium users receive priority support with faster response times.'
+			answer: 'You can reach our support team through the Help Center, email us at support@SnipCrate.com, or use the live chat feature available 24/7. Premium users receive priority support with faster response times.'
 		},
 		{
 			question: 'What devices and browsers are supported?',
-			answer: 'FrenCircle works on all modern web browsers (Chrome, Firefox, Safari, Edge) and devices (desktop, tablet, mobile). We also have dedicated mobile apps for iOS and Android available in their respective app stores.'
+			answer: 'SnipCrate works on all modern web browsers (Chrome, Firefox, Safari, Edge) and devices (desktop, tablet, mobile). We also have dedicated mobile apps for iOS and Android available in their respective app stores.'
 		}
 	],
 
 	// General
-	welcome: 'Welcome to FrenCircle',
+	welcome: 'Welcome to SnipCrate',
 	description: 'A modern web application built with Next.js and shadcn/ui',
 	browseProducts: 'Browse our complete product catalog',
 	latestProducts: 'Latest products added to our collection'

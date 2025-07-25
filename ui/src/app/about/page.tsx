@@ -32,45 +32,44 @@ export default function About() {
 							{t('aboutDescription')}
 						</p>
 					</div>
-					<div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+					<div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
 						{[
 							{
-								title: t('faq'),
-								desc: t('faqDescription'),
+								title: "Dynamic Snippet Sharing",
+								desc: "Share, fork, and collaborate on code snippets with real-time variable editing and instant updates.Build, reuse, and evolve code together.",
 								features: [
-									"REST & GraphQL APIs",
-									"Webhooks",
-									"SDKs for popular languages",
+									"FOrk & collaborate",
+									"Dynamic snippets with custom variables",
+									"Analytics & insights",
 								],
 								link: "/about/faq",
 							},
 							{
-								title: "Free Forever",
-								desc: "Start for free, no credit card required. Upgrade anytime.",
+								title: "Collaboration & Community",
+								desc: "Rate, comment, and contribute. Follow creators, see trending snippets, and build your dev circle.",
 								features: [
-									"Generous free tier",
-									"No hidden fees",
-									"Cancel anytime",
+									"Rating & feedback system",
+									"Comment threads and replies",
+									"Follow developers & discover teams",
 								],
-								button: <Button variant="outline">Get Started</Button>,
+								button: <Button variant="outline">Explore Community</Button>,
 							},
 							{
-								title: "Scalable & Reliable",
-								desc: "Enterprise-grade infrastructure for teams of any size.",
+								title: "Easy Integration & Analytics",
+								desc: "Integrate snippets into your projects with a click. Get usage analytics for your shared snippets.",
 								features: [
-									"99.99% uptime SLA",
-									"Auto-scaling",
-									"Global CDN",
+									"Personal usage analytics",
+									"Public stats for every snippet",
 								],
-								button: <Button variant="link">Learn More</Button>,
+								button: <Button variant="link">View Integrations</Button>,
 							},
 							{
-								title: "Secure by Design",
-								desc: "Your data is protected with best-in-class security features.",
+								title: "Security & Privacy",
+								desc: "Snippets are protected by user authentication. You control who can view or fork your work.",
 								features: [
-									"End-to-end encryption",
-									"GDPR & SOC2 compliant",
-									"SSO & 2FA support",
+									"OAuth & SSO support",
+									"Granular access controls",
+									"Data encrypted at rest",
 								],
 								button: <Button variant="outline">Security Details</Button>,
 							},
