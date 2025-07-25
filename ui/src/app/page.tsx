@@ -11,6 +11,8 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { DateRange } from "react-day-picker";
 
+import Head from "next/head";
+
 export default function Home() {
 	const [date, setDate] = useState<DateRange | undefined>({
 		from: new Date(),
@@ -48,57 +50,72 @@ export default function Home() {
 	}, []);
 
 	return (
-		<div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
-			{/* Hero Section */}
-			<section className="container mx-auto py-20 text-center">
-				<div className="mx-auto max-w-4xl">
-					<Badge className="mb-6" variant="secondary">
-						SnipCrate
-					</Badge>
-					<motion.div
-						className="mb-6"
-						initial={{ opacity: 0, y: 20 }}
-						animate={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.8, delay: 0.2 }}
-					>
-						<h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl">
-							<span className="relative inline-block">
-								<span className="bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent font-mono">
-									{displayedText}
+		<>
+			<Head>
+				<title>SnipCrate – Effortless Code Snippet Management</title>
+				<meta name="description" content="SnipCrate helps you organize, search, and share code snippets with ease. Boost your productivity and never lose a snippet again." />
+				<meta property="og:title" content="SnipCrate – Effortless Code Snippet Management" />
+				<meta property="og:description" content="SnipCrate helps you organize, search, and share code snippets with ease. Boost your productivity and never lose a snippet again." />
+				<meta property="og:type" content="website" />
+				<meta property="og:url" content="https://snipcrate.com/" />
+				<meta property="og:image" content="/public/file.svg" />
+				<meta name="twitter:card" content="summary_large_image" />
+				<meta name="twitter:title" content="SnipCrate – Effortless Code Snippet Management" />
+				<meta name="twitter:description" content="SnipCrate helps you organize, search, and share code snippets with ease. Boost your productivity and never lose a snippet again." />
+				<meta name="twitter:image" content="/public/file.svg" />
+			</Head>
+			<div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
+				{/* Hero Section */}
+				<section className="container mx-auto py-20 text-center">
+					<div className="mx-auto max-w-4xl">
+						<Badge className="mb-6" variant="secondary">
+							SnipCrate
+						</Badge>
+						<motion.div
+							className="mb-6"
+							initial={{ opacity: 0, y: 20 }}
+							animate={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.8, delay: 0.2 }}
+						>
+							<h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl">
+								<span className="relative inline-block">
+									<span className="bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent font-mono">
+										{displayedText}
+									</span>
+									{showCursor && (
+										<span className="inline-block w-0.5 h-8 sm:h-12 bg-primary ml-1 animate-pulse" />
+									)}
 								</span>
-								{showCursor && (
-									<span className="inline-block w-0.5 h-8 sm:h-12 bg-primary ml-1 animate-pulse" />
-								)}
-							</span>
-						</h1>
-					</motion.div>
-					<p className="mb-8 text-xl text-gray-600 dark:text-gray-300 sm:text-2xl">
-						{t('description')}
-					</p>
+							</h1>
+						</motion.div>
+						<p className="mb-8 text-xl text-gray-600 dark:text-gray-300 sm:text-2xl">
+							{t('description')}
+						</p>
 
-					{/* Date Range Picker */}
-					<div className="mb-8 flex justify-center">
-						<DatePickerWithRange
-							date={date}
-							onDateChange={setDate}
-							placeholder="Select date range for events"
-						/>
-					</div>
+						{/* Date Range Picker */}
+						<div className="mb-8 flex justify-center">
+							<DatePickerWithRange
+								date={date}
+								onDateChange={setDate}
+								placeholder="Select date range for events"
+							/>
+						</div>
 
-					<div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
-						<Button size="lg" className="text-md">
-							Get Started Free
-							<ArrowRight className="ml-2 h-5 w-5" />
-						</Button>
-
-						<Link href="/about">
-							<Button size="lg" variant="outline" className="text-md">
-								{t('about')}
+						<div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
+							<Button size="lg" className="text-md">
+								Get Started Free
+								<ArrowRight className="ml-2 h-5 w-5" />
 							</Button>
-						</Link>
+
+							<Link href="/about">
+								<Button size="lg" variant="outline" className="text-md">
+									{t('about')}
+								</Button>
+							</Link>
+						</div>
 					</div>
-				</div>
-			</section>
-		</div>
+				</section>
+			</div>
+		</>
 	);
 }

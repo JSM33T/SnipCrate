@@ -15,7 +15,7 @@ const eslintConfig = [
 		rules: {
 
 			strict: ["error", "global"],
-			indent: ["error", "tab", { SwitchCase: 1 }],
+			indent: ["watn", "tab", { SwitchCase: 1 }],
 			"no-tabs": ["error", { allowIndentationTabs: true }],
 			"no-unused-vars": ["off"]
 		},

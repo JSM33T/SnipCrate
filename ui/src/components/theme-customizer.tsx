@@ -18,11 +18,11 @@ import {
 
 const accentColors: { name: AccentColor; label: string; color: string }[] = [
 	{ name: "blue", label: "Blue", color: "rgb(59 130 246)" },
-	{ name: "green", label: "Green", color: "rgb(34 197 94)" },
+	// { name: "green", label: "Green", color: "rgb(34 197 94)" },
 	{ name: "purple", label: "Purple", color: "rgb(147 51 234)" },
-	{ name: "red", label: "Red", color: "rgb(239 68 68)" },
-	{ name: "orange", label: "Orange", color: "rgb(249 115 22)" },
-	{ name: "yellow", label: "Yellow", color: "rgb(234 179 8)" },
+	// { name: "red", label: "Red", color: "rgb(239 68 68)" },
+	// { name: "orange", label: "Orange", color: "rgb(249 115 22)" },
+	// { name: "yellow", label: "Yellow", color: "rgb(234 179 8)" },
 	{ name: "pink", label: "Pink", color: "rgb(236 72 153)" },
 	{ name: "emerald", label: "Emerald", color: "rgb(16 185 129)" },
 	{ name: "cyan", label: "Cyan", color: "rgb(6 182 212)" },

@@ -1,41 +1,52 @@
-"use client";
-import * as React from "react";
-import { Accordion, AccordionItem } from "@/components/ui/accordion";
+
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { Input } from "@/components/ui/input";
-import { useLanguage } from "@/contexts/language-context";
+import { cookies } from "next/headers";
 
-export default function About() {
-	const [search, setSearch] = React.useState("");
-	const { language, t } = useLanguage();
-	const [faqItems, setFaqItems] = React.useState<AccordionItem[]>([]);
+// Server component for FAQ page
+import { Metadata } from "next";
 
-	// Load FAQ items from translations
-	React.useEffect(() => {
-		const loadFaqItems = async () => {
-			try {
-				const translations = await import(`@/lib/translations/${language}`);
-				setFaqItems(translations.default.faqItems || []);
-			} catch (error) {
-				console.error('Failed to load FAQ items:', error);
-				// Fallback to English
-				const englishTranslations = await import(`@/lib/translations/en`);
-				setFaqItems(englishTranslations.default.faqItems || []);
-			}
-		};
+export const metadata: Metadata = {
+	title: "SnipCrate – Effortless Code Snippet Management",
+	description: "SnipCrate helps you organize, search, and share code snippets with ease. Boost your productivity and never lose a snippet again.",
+	openGraph: {
+		title: "SnipCrate – Effortless Code Snippet Management",
+		description: "SnipCrate helps you organize, search, and share code snippets with ease. Boost your productivity and never lose a snippet again.",
+		type: "website",
+		url: "https://snipcrate.com/",
+		images: ["/public/file.svg"],
+	},
+	twitter: {
+		card: "summary_large_image",
+		title: "SnipCrate – Effortless Code Snippet Management",
+		description: "SnipCrate helps you organize, search, and share code snippets with ease. Boost your productivity and never lose a snippet again.",
+		images: ["/public/file.svg"],
+	},
+};
 
-		loadFaqItems();
-	}, [language]);
+type FaqItem = typeof import("@/lib/translations/en").default.faqItems extends Array<infer T> ? T : never;
 
-	const filteredItems = React.useMemo(() => {
-		if (!search.trim()) return faqItems;
-		return faqItems.filter(
-			(item: AccordionItem) =>
-				item.question.toLowerCase().includes(search.toLowerCase()) ||
-				item.answer.toLowerCase().includes(search.toLowerCase())
-		);
-	}, [search, faqItems]);
+async function getLangFromCookie(): Promise<string> {
+	const cookieStore = cookies();
+	const lang = (await cookieStore).get("lang")?.value;
+	return lang || "en";
+}
 
+async function getTranslations(language: string) {
+	try {
+		const translations = (await import(`@/lib/translations/${language}`)).default;
+		return translations;
+	} catch {
+		const translations = (await import("@/lib/translations/en")).default;
+		return translations;
+	}
+}
 
+export default async function FaqPage() {
+	const language = getLangFromCookie();
+	const translations = await getTranslations(await language);
+	const faqItems: FaqItem[] = translations.faqItems || [];
+	const t = (key: string) => translations[key] || key;
 
 	return (
 		<div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
@@ -43,24 +54,35 @@ export default function About() {
 				<div className="mx-auto max-w-6xl">
 					<div className="mb-16 text-center">
 						<h2 className="mb-4 text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
-							{t('frequentlyAskedQuestions')}
+							{t("frequentlyAskedQuestions")}
 						</h2>
 						<p className="text-xl text-gray-600 dark:text-gray-300">
-							{t('faqDescription')}
+							{t("faqDescription")}
 						</p>
 					</div>
+					{/* Search is not available in server components without client interactivity */}
 					<div className="max-w-xl mx-auto mb-8">
 						<Input
-							placeholder={t('searchFaqPlaceholder')}
-							value={search}
-							onChange={e => setSearch(e.target.value)}
-							className="bg-white dark:bg-gray-900"
+							placeholder={t("searchFaqPlaceholder")}
+							value={""}
+							readOnly
+							className="bg-white dark:bg-gray-900 opacity-60 cursor-not-allowed"
 						/>
 					</div>
-					<Accordion items={filteredItems} />
+					<Accordion type="multiple" defaultValue={[]}>
+						{faqItems.map((item, idx) => (
+							<AccordionItem value={String(idx)} key={idx}>
+								<AccordionTrigger value={String(idx)}>
+									{item.question}
+								</AccordionTrigger>
+								<AccordionContent value={String(idx)}>
+									{item.answer}
+								</AccordionContent>
+							</AccordionItem>
+						))}
+					</Accordion>
 				</div>
 			</section>
 		</div>
 	);
 }
-

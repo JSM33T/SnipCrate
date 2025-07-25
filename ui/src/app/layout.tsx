@@ -5,7 +5,7 @@ import { Navbar } from "@/components/shared/navbar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { LanguageProvider } from "@/contexts/language-context";
 import { TranslationGuard } from "@/components/translation-guard";
-import OffcanvasSidebar from "@/components/ui/offcanvas-sidebar";
+import OffcanvasSidebar from "@/components/shared/offcanvas-sidebar";
 
 const inter = Inter({
 	variable: "--font-inter",
