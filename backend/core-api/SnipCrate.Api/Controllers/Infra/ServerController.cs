@@ -19,7 +19,7 @@ namespace SnipCrate.Api.Controllers.Infra
                 ProcessArchitecture = RuntimeInformation.ProcessArchitecture.ToString(),
                 Framework = RuntimeInformation.FrameworkDescription,
                 Environment.MachineName,
-                Status = "Up and running"
+                Status = "Up and running | #3"
             };
 
             return Ok(systemDetails);

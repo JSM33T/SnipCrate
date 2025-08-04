@@ -2,6 +2,8 @@ name: Deploy Backend
 
 on:
   push:
+    branches:
+      - prod
     paths:
       - 'backend/core-api/**'
 
@@ -22,6 +24,8 @@ jobs:
           script: |
             cd /srv/SnipCrate
             git pull
+            cd backend/core-api
             docker rm -f snipcrate-api || true
-            docker build -t snipcrate-api:latest ./backend/core-api/SnipCrate.Api
+            docker build -t snipcrate-api:latest -f SnipCrate.Api/Dockerfile .
             docker run -d --name snipcrate-api -p 8080:8080 --restart unless-stopped snipcrate-api:latest
+
