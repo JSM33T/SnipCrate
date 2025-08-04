@@ -1,0 +1,6 @@
+@SnipCrate.Api_HostAddress = http://localhost:5183
+
+GET {{SnipCrate.Api_HostAddress}}/api/home
+Accept: application/json
+
+###
