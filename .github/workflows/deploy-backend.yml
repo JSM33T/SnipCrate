@@ -2,6 +2,8 @@ name: Deploy Backend
 
 on:
   push:
+    branches:
+      - prod
     paths:
       - 'backend/core-api/**'
 
