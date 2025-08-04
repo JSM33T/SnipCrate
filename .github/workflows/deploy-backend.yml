@@ -1,0 +1,29 @@
+name: Deploy Backend
+
+on:
+  push:
+    paths:
+      - 'backend/core-api/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Connect and deploy via SSH
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd /srv/SnipCrate
+            git pull
+            docker stop snipcrate-api || true
+            docker rm snipcrate-api || true
+            docker rmi snipcrate-api:latest || true
+            docker build -t snipcrate-api:latest ./backend/core-api/SnipCrate.Api
+            docker run -d --name snipcrate-api -p 8080:8080 snipcrate-api:latest
