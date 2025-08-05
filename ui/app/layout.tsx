@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import { Navbar } from "@/components/shared/Navbar";
+import { ThemeProvider } from "@/components/theme-provider";
 import Loader from "@/components/shared/Loader";
 
 const geistSans = Geist({
@@ -26,16 +27,23 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
+        <html lang="en" suppressHydrationWarning>
             <Analytics />
             <body
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >
-                <Loader />
-                <Navbar />
-                <div>{/* Offset for fixed navbar */}
-                    {children}
-                </div>
+                <ThemeProvider
+                    attribute="class"
+                    defaultTheme="system"
+                    enableSystem
+                    disableTransitionOnChange
+                >
+                    <Loader />
+                    <Navbar />
+                    <div>{/* Offset for fixed navbar */}
+                        {children}
+                    </div>
+                </ThemeProvider>
             </body>
         </html>
     );

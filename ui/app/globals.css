@@ -119,5 +119,28 @@
 
   body {
     @apply bg-background text-foreground;
+    /* Hide vertical scrollbar but keep scrolling enabled */
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+  }
+
+  body::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari, Opera */
+  }
+
+  html {
+    /* Hide vertical scrollbar for html element too */
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+  }
+
+  html::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari, Opera */
   }
 }
