@@ -37,9 +37,11 @@ export default function AboutPage() {
                 <div className="absolute inset-0 opacity-[0.015] dark:opacity-[0.02] bg-[url('data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E')" />
 
                 {/* Title */}
-                <h1 className="relative z-10 text-4xl md:text-5xl lg:text-6xl font-bold mb-4 bg-gradient-to-r from-slate-900 via-slate-700 to-slate-800 dark:from-slate-100 dark:via-slate-200 dark:to-slate-300 bg-clip-text text-transparent leading-tight max-w-4xl">
+               <div className="max-md:mt-40">
+                 <h1 className="relative z-10 text-4xl md:text-5xl lg:text-6xl font-bold mb-4 bg-gradient-to-r from-slate-900 via-slate-700 to-slate-800 dark:from-slate-100 dark:via-slate-200 dark:to-slate-300 bg-clip-text text-transparent leading-tight max-w-4xl">
                     About SnipCrate
                 </h1>
+               </div>
                 <p className="relative z-10 text-lg md:text-xl text-slate-600 dark:text-slate-400 mb-10 leading-relaxed max-w-2xl mx-auto px-4 font-medium">
                     SnipCrate is a collaborative hub for code snippets, AI prompts, and script templates. Discover, share, and accelerate your workflow with our growing developer community.
                 </p>
