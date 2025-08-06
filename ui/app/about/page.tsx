@@ -15,7 +15,6 @@ export default function AboutPage() {
                 </div>
             </section>
 
-            {/* Info Section (with Cards) - CSR */}
             <AboutCards />
         </main>
     );

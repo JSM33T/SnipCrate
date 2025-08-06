@@ -304,19 +304,11 @@ import {
     AccordionTrigger,
 } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Menu, User, Settings, LogOut, CreditCard, Users } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { AnimatedLogo } from '@/components/shared/AnimatedLogo';
+import { UserProfile, MobileProfileActions } from '@/components/shared/UserProfile';
 
 // Define the shape of a navigation item
 interface NavItem {
@@ -325,14 +317,6 @@ interface NavItem {
     children?: NavItem[];
     description?: string;
     enabled?: boolean;
-}
-
-// Define the shape of user data
-interface UserProfile {
-    name: string;
-    email: string;
-    designation: string;
-    avatar?: string;
 }
 
 // Define your navigation structure
@@ -363,14 +347,6 @@ const navItems: NavItem[] = [
         ],
     },
 ];
-
-// Mock user data - replace with your actual user data
-const mockUser: UserProfile = {
-    name: "John Doe",
-    email: "john.doe@example.com",
-    designation: "Senior Developer",
-    avatar: "/api/placeholder/32/32" // Replace with actual avatar URL
-};
 
 const Logo = () => (
     <Link
@@ -425,64 +401,6 @@ const ListItem = React.forwardRef<
     );
 });
 ListItem.displayName = 'ListItem';
-
-const ProfileDropdown = ({ user }: { user: UserProfile }) => {
-    return (
-        <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="relative h-10 w-auto px-2">
-                    <div className="flex items-center gap-2">
-                        <Avatar className="h-8 w-8">
-                            <AvatarImage src={user.avatar} alt={user.name} />
-                            <AvatarFallback className="text-xs">
-                                {user.name.split(' ').map(n => n[0]).join('').toUpperCase()}
-                            </AvatarFallback>
-                        </Avatar>
-                        <div className="hidden md:block text-left">
-                            <p className="text-sm font-medium leading-none">{user.name}</p>
-                            <p className="text-xs text-muted-foreground">{user.designation}</p>
-                        </div>
-                    </div>
-                </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56" align="end" forceMount>
-                <DropdownMenuLabel className="font-normal">
-                    <div className="flex flex-col space-y-1">
-                        <p className="text-sm font-medium leading-none">{user.name}</p>
-                        <p className="text-xs leading-none text-muted-foreground">
-                            {user.email}
-                        </p>
-                        <p className="text-xs leading-none text-muted-foreground">
-                            {user.designation}
-                        </p>
-                    </div>
-                </DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                    <User className="mr-2 h-4 w-4" />
-                    <span>Profile</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                    <Settings className="mr-2 h-4 w-4" />
-                    <span>Settings</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                    <CreditCard className="mr-2 h-4 w-4" />
-                    <span>Billing</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                    <Users className="mr-2 h-4 w-4" />
-                    <span>Team</span>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                    <LogOut className="mr-2 h-4 w-4" />
-                    <span>Log out</span>
-                </DropdownMenuItem>
-            </DropdownMenuContent>
-        </DropdownMenu>
-    );
-};
 
 const DesktopNav = () => {
     const pathname = usePathname();
@@ -557,18 +475,7 @@ const MobileNav = () => {
                         </div>
 
                         {/* Mobile Profile Section */}
-                        <div className="flex items-center gap-3 p-3 mb-4 rounded-md bg-accent/50">
-                            <Avatar className="h-10 w-10">
-                                <AvatarImage src={mockUser.avatar} alt={mockUser.name} />
-                                <AvatarFallback>
-                                    {mockUser.name.split(' ').map(n => n[0]).join('').toUpperCase()}
-                                </AvatarFallback>
-                            </Avatar>
-                            <div className="flex-1">
-                                <p className="text-sm font-medium">{mockUser.name}</p>
-                                <p className="text-xs text-muted-foreground">{mockUser.designation}</p>
-                            </div>
-                        </div>
+                        <UserProfile variant="mobile" className="mb-4" />
 
                         <nav className="flex flex-col space-y-1">
                             {navItems.map((item) =>
@@ -629,26 +536,7 @@ const MobileNav = () => {
                             )}
 
                             {/* Mobile Profile Actions */}
-                            <div className="pt-4 border-t space-y-1">
-                                <SheetClose asChild>
-                                    <Button variant="ghost" className="w-full justify-start">
-                                        <User className="mr-2 h-4 w-4" />
-                                        Profile
-                                    </Button>
-                                </SheetClose>
-                                <SheetClose asChild>
-                                    <Button variant="ghost" className="w-full justify-start">
-                                        <Settings className="mr-2 h-4 w-4" />
-                                        Settings
-                                    </Button>
-                                </SheetClose>
-                                <SheetClose asChild>
-                                    <Button variant="ghost" className="w-full justify-start text-red-600">
-                                        <LogOut className="mr-2 h-4 w-4" />
-                                        Log out
-                                    </Button>
-                                </SheetClose>
-                            </div>
+                            <MobileProfileActions />
                         </nav>
                     </div>
                 </SheetContent>
@@ -679,7 +567,7 @@ export function Navbar() {
                     <ThemeToggle />
                     {/* Desktop Profile Dropdown */}
                     <div className="hidden md:block">
-                        <ProfileDropdown user={mockUser} />
+                        <UserProfile />
                     </div>
                     <MobileNav />
                 </div>

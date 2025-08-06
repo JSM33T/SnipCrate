@@ -4,6 +4,7 @@ import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import { Navbar } from "@/components/shared/Navbar";
 import { ThemeProvider } from "@/components/theme-provider";
+import { UserProvider } from "@/lib/stores/userStore";
 import Loader from "@/components/shared/Loader";
 
 const geistSans = Geist({
@@ -38,11 +39,13 @@ export default function RootLayout({
                     enableSystem
                     disableTransitionOnChange
                 >
-                    <Loader />
-                    <Navbar />
-                    <div>{/* Offset for fixed navbar */}
-                        {children}
-                    </div>
+                    <UserProvider>
+                        <Loader />
+                        <Navbar />
+                        <div>{/* Offset for fixed navbar */}
+                            {children}
+                        </div>
+                    </UserProvider>
                 </ThemeProvider>
             </body>
         </html>
