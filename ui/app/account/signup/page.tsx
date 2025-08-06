@@ -126,7 +126,7 @@ export default function SignUpPage() {
                             Account Created Successfully!
                         </CardTitle>
                         <CardDescription>
-                            Welcome to SnipCrate! You're being signed in...
+                            Welcome to SnipCrate! You&apos;re being signed in...
                         </CardDescription>
                         <div className="mt-4">
                             <Loader2 className="h-6 w-6 animate-spin mx-auto" />

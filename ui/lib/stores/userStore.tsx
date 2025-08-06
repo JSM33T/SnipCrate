@@ -49,45 +49,45 @@ const initialState: UserState = {
 // Reducer function
 function userReducer(state: UserState, action: UserAction): UserState {
     switch (action.type) {
-        case 'LOGIN_START':
-            return {
-                ...state,
-                isLoading: true,
-                error: null,
-            };
-        case 'LOGIN_SUCCESS':
-            return {
-                ...state,
-                user: { ...action.payload, isAuthenticated: true },
-                isLoading: false,
-                error: null,
-            };
-        case 'LOGIN_ERROR':
-            return {
-                ...state,
-                user: null,
-                isLoading: false,
-                error: action.payload,
-            };
-        case 'LOGOUT':
-            return {
-                ...state,
-                user: null,
-                isLoading: false,
-                error: null,
-            };
-        case 'UPDATE_PROFILE':
-            return {
-                ...state,
-                user: state.user ? { ...state.user, ...action.payload } : null,
-            };
-        case 'CLEAR_ERROR':
-            return {
-                ...state,
-                error: null,
-            };
-        default:
-            return state;
+    case 'LOGIN_START':
+        return {
+            ...state,
+            isLoading: true,
+            error: null,
+        };
+    case 'LOGIN_SUCCESS':
+        return {
+            ...state,
+            user: { ...action.payload, isAuthenticated: true },
+            isLoading: false,
+            error: null,
+        };
+    case 'LOGIN_ERROR':
+        return {
+            ...state,
+            user: null,
+            isLoading: false,
+            error: action.payload,
+        };
+    case 'LOGOUT':
+        return {
+            ...state,
+            user: null,
+            isLoading: false,
+            error: null,
+        };
+    case 'UPDATE_PROFILE':
+        return {
+            ...state,
+            user: state.user ? { ...state.user, ...action.payload } : null,
+        };
+    case 'CLEAR_ERROR':
+        return {
+            ...state,
+            error: null,
+        };
+    default:
+        return state;
     }
 }
 

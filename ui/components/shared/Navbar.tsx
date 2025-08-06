@@ -1,314 +1,16 @@
-// 'use client';
-
-// import * as React from 'react';
-// import Link from 'next/link';
-// import { usePathname } from 'next/navigation';
-// import { cn } from '@/lib/utils';
-// import {
-//     NavigationMenu,
-//     NavigationMenuContent,
-//     NavigationMenuItem,
-//     NavigationMenuLink,
-//     NavigationMenuList,
-//     NavigationMenuTrigger,
-//     navigationMenuTriggerStyle,
-// } from '@/components/ui/navigation-menu';
-// import {
-//     Accordion,
-//     AccordionContent,
-//     AccordionItem,
-//     AccordionTrigger,
-// } from '@/components/ui/accordion';
-// import { Button } from '@/components/ui/button';
-// import { Menu } from 'lucide-react';
-// import { ThemeToggle } from '@/components/theme-toggle';
-// import { Sheet, SheetClose, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-// import { AnimatedLogo } from '@/components/shared/AnimatedLogo';
-
-// // Define the shape of a navigation item
-// interface NavItem {
-//     label: string;
-//     href?: string;
-//     children?: NavItem[];
-//     description?: string;
-//     enabled?: boolean;
-// }
-
-// // Define your navigation structure
-// const navItems: NavItem[] = [
-//     { label: 'Home', href: '/', enabled: true },
-//     {
-//         label: 'About',
-//         enabled: true,
-//         children: [
-//             {
-//                 label: 'About Us',
-//                 href: '/about',
-//                 description: 'Learn about our mission and the team behind SnipCrate.',
-//                 enabled: true,
-//             },
-//             {
-//                 label: 'Our Services',
-//                 href: '/about/services',
-//                 description: 'Discover the services we offer to help your business grow.',
-//                 enabled: false,
-//             },
-//             {
-//                 label: 'Contact Us',
-//                 href: '/about/contact',
-//                 description: 'Get in touch with our team for support and inquiries.',
-//                 enabled: false,
-//             }
-//         ],
-//     },
-// ];
-
-// const Logo = () => (
-//     <Link
-//         href="/"
-//         className="flex items-center gap-2"
-//         prefetch={false}
-//         passHref>
-//         <AnimatedLogo className="h-6 w-auto" aria-label="SnipCrate Logo" />
-//     </Link>
-// );
-
-// const ListItem = React.forwardRef<
-//     React.ElementRef<'a'>,
-//     React.ComponentPropsWithoutRef<'a'> & { disabled?: boolean }
-// >(({ className, title, children, href, disabled = false, ...props }, ref) => {
-//     const baseClasses = cn(
-//         'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors',
-//         disabled
-//             ? 'opacity-50 cursor-not-allowed'
-//             : 'hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
-//         className
-//     );
-
-//     return (
-//         <li>
-//             <NavigationMenuLink asChild>
-//                 {href && !disabled ? (
-//                     <Link
-//                         href={href}
-//                         ref={ref}
-//                         className={baseClasses}
-//                         {...props}
-//                     >
-//                         <div className="text-sm font-medium leading-none">{title}</div>
-//                         <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-//                             {children}
-//                         </p>
-//                     </Link>
-//                 ) : (
-//                     <span
-//                         className={baseClasses}
-//                         {...props}
-//                     >
-//                         <div className="text-sm font-medium leading-none">{title}</div>
-//                         <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-//                             {children}
-//                         </p>
-//                     </span>
-//                 )}
-//             </NavigationMenuLink>
-//         </li>
-//     );
-// });
-// ListItem.displayName = 'ListItem';
-
-// const DesktopNav = () => {
-//     const pathname = usePathname();
-//     return (
-//         <div className="hidden md:flex">
-//             <NavigationMenu className="hidden md:flex">
-//                 <NavigationMenuList>
-//                     {navItems.map((item) =>
-//                         item.children ? (
-//                             <NavigationMenuItem key={item.label}>
-//                                 <NavigationMenuTrigger className="flex items-center gap-1 group data-[state=open]:bg-accent/50">
-//                                     <span>{item.label}</span>
-//                                 </NavigationMenuTrigger>
-//                                 <NavigationMenuContent>
-//                                     <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-//                                         {item.children.map((child) => (
-//                                             <ListItem
-//                                                 key={child.label}
-//                                                 href={child.href}
-//                                                 title={child.label}
-//                                                 disabled={child.enabled === false}
-//                                             >
-//                                                 {child.description}
-//                                             </ListItem>
-//                                         ))}
-//                                     </ul>
-//                                 </NavigationMenuContent>
-//                             </NavigationMenuItem>
-//                         ) : (
-//                             <NavigationMenuItem key={item.label}>
-//                                 {/* Only render Link if href exists and item is enabled, otherwise render disabled text */}
-//                                 {item.href && item.enabled !== false ? (
-//                                     <Link href={item.href} passHref>
-//                                         <NavigationMenuLink
-//                                             className={navigationMenuTriggerStyle()}
-//                                             active={pathname === item.href}
-//                                         >
-//                                             {item.label}
-//                                         </NavigationMenuLink>
-//                                     </Link>
-//                                 ) : (
-//                                     <span className={cn(
-//                                         navigationMenuTriggerStyle(),
-//                                         item.enabled === false && "opacity-50 cursor-not-allowed"
-//                                     )}>
-//                                         {item.label}
-//                                     </span>
-//                                 )}
-//                             </NavigationMenuItem>
-//                         )
-//                     )}
-//                 </NavigationMenuList>
-//             </NavigationMenu>
-//         </div>
-//     );
-// };
-
-// const MobileNav = () => {
-//     const pathname = usePathname();
-//     return (
-//         <div className="md:hidden">
-//             <Sheet>
-//                 <SheetTrigger asChild>
-//                     <Button variant="ghost" size="icon">
-//                         <Menu className="h-6 w-6" />
-//                         <span className="sr-only">Toggle Menu</span>
-//                     </Button>
-//                 </SheetTrigger>
-//                 <SheetContent side="left" className="w-full max-w-xs pr-0">
-//                     <div className="p-6 pt-0">
-//                         <div className="flex items-center justify-between py-4 border-b mb-4">
-//                             <Logo />
-//                         </div>
-//                         <nav className="flex flex-col space-y-1">
-//                             {navItems.map((item) =>
-//                                 item.children ? (
-//                                     <Accordion key={item.label} type="single" collapsible>
-//                                         <AccordionItem value={item.label} className="border-b-0">
-//                                             <AccordionTrigger className="flex items-center justify-between rounded-md px-3 py-3 text-base font-medium hover:bg-accent hover:text-accent-foreground transition-colors [&[data-state=open]>svg]:rotate-180">
-//                                                 <span>{item.label}</span>
-//                                             </AccordionTrigger>
-//                                             <AccordionContent className="pl-4 pb-0">
-//                                                 <div className="flex flex-col space-y-1">
-//                                                     {item.children.map((child) => (
-//                                                         <SheetClose asChild key={child.label}>
-//                                                             {child.href && child.enabled !== false ? (
-//                                                                 <Link
-//                                                                     href={child.href}
-//                                                                     className={cn(
-//                                                                         'block rounded-md px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors'
-//                                                                     )}
-//                                                                 >
-//                                                                     {child.label}
-//                                                                 </Link>
-//                                                             ) : (
-//                                                                 <span className={cn(
-//                                                                     'block rounded-md px-3 py-2 text-sm font-medium text-muted-foreground',
-//                                                                     child.enabled === false && 'opacity-50 cursor-not-allowed'
-//                                                                 )}>
-//                                                                     {child.label}
-//                                                                 </span>
-//                                                             )}
-//                                                         </SheetClose>
-//                                                     ))}
-//                                                 </div>
-//                                             </AccordionContent>
-//                                         </AccordionItem>
-//                                     </Accordion>
-//                                 ) : (
-//                                     <SheetClose asChild key={item.label}>
-//                                         {item.href && item.enabled !== false ? (
-//                                             <Link
-//                                                 href={item.href}
-//                                                 className={cn(
-//                                                     'block rounded-md px-3 py-3 text-base font-medium hover:bg-accent hover:text-accent-foreground'
-//                                                 )}
-//                                             >
-//                                                 {item.label}
-//                                             </Link>
-//                                         ) : (
-//                                             <span className={cn(
-//                                                 'block rounded-md px-3 py-3 text-base font-medium',
-//                                                 item.enabled === false && 'opacity-50 cursor-not-allowed'
-//                                             )}>
-//                                                 {item.label}
-//                                             </span>
-//                                         )}
-//                                     </SheetClose>
-//                                 )
-//                             )}
-//                         </nav>
-//                     </div>
-//                 </SheetContent>
-//             </Sheet>
-//         </div>
-//     );
-// };
-
-// export function Navbar() {
-//     // Offcanvas Sidepanel State
-//     const [openPanel, setOpenPanel] = React.useState(false);
-//     const [showChat, setShowChat] = React.useState(false);
-
-//     return (
-//         <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-//             <div className="container flex h-14 items-center justify-between px-4 md:px-6">
-//                 {/* Left Aligned Logo */}
-//                 <div className="flex items-center">
-//                     <Logo />
-//                 </div>
-
-//                 {/* Centered Desktop Navigation */}
-//                 <div className="hidden flex-1 justify-center md:flex">
-//                     <DesktopNav />
-//                 </div>
-
-//                 {/* Right Aligned Controls */}
-//                 <div className="flex items-center gap-2">
-//                     <ThemeToggle />
-//                     <MobileNav />
-//                 </div>
-//             </div>
-//         </header>
-//     );
-// }
-
 'use client';
 
 import * as React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import {
-    NavigationMenu,
-    NavigationMenuContent,
-    NavigationMenuItem,
-    NavigationMenuLink,
-    NavigationMenuList,
-    NavigationMenuTrigger,
-    navigationMenuTriggerStyle,
-} from '@/components/ui/navigation-menu';
-import {
-    Accordion,
-    AccordionContent,
-    AccordionItem,
-    AccordionTrigger,
-} from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
 import { Menu } from 'lucide-react';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { AnimatedLogo } from '@/components/shared/AnimatedLogo';
 import { UserProfile, MobileProfileActions } from '@/components/shared/UserProfile';
+import { motion, AnimatePresence } from 'framer-motion';
 
 // Define the shape of a navigation item
 interface NavItem {
@@ -322,30 +24,7 @@ interface NavItem {
 // Define your navigation structure
 const navItems: NavItem[] = [
     { label: 'Home', href: '/', enabled: true },
-    {
-        label: 'About',
-        enabled: true,
-        children: [
-            {
-                label: 'About Us',
-                href: '/about',
-                description: 'Learn about our mission and the team behind SnipCrate.',
-                enabled: true,
-            },
-            {
-                label: 'Our Services',
-                href: '/about/services',
-                description: 'Discover the services we offer to help your business grow.',
-                enabled: false,
-            },
-            {
-                label: 'Contact Us',
-                href: '/about/contact',
-                description: 'Get in touch with our team for support and inquiries.',
-                enabled: false,
-            }
-        ],
-    },
+    { label: 'About', href: '/about', enabled: true },
 ];
 
 const Logo = () => (
@@ -358,101 +37,73 @@ const Logo = () => (
     </Link>
 );
 
-const ListItem = React.forwardRef<
-    React.ElementRef<'a'>,
-    React.ComponentPropsWithoutRef<'a'> & { disabled?: boolean }
->(({ className, title, children, href, disabled = false, ...props }, ref) => {
-    const baseClasses = cn(
-        'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors',
-        disabled
-            ? 'opacity-50 cursor-not-allowed'
-            : 'hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
-        className
-    );
-
-    return (
-        <li>
-            <NavigationMenuLink asChild>
-                {href && !disabled ? (
-                    <Link
-                        href={href}
-                        ref={ref}
-                        className={baseClasses}
-                        {...props}
-                    >
-                        <div className="text-sm font-medium leading-none">{title}</div>
-                        <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                            {children}
-                        </p>
-                    </Link>
-                ) : (
-                    <span
-                        className={baseClasses}
-                        {...props}
-                    >
-                        <div className="text-sm font-medium leading-none">{title}</div>
-                        <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                            {children}
-                        </p>
-                    </span>
-                )}
-            </NavigationMenuLink>
-        </li>
-    );
-});
-ListItem.displayName = 'ListItem';
-
 const DesktopNav = () => {
     const pathname = usePathname();
+    const [hoveredItem, setHoveredItem] = React.useState<string | null>(null);
+
     return (
         <div className="hidden md:flex">
-            <NavigationMenu className="hidden md:flex">
-                <NavigationMenuList>
-                    {navItems.map((item) =>
-                        item.children ? (
-                            <NavigationMenuItem key={item.label}>
-                                <NavigationMenuTrigger className="flex items-center gap-1 group data-[state=open]:bg-accent/50">
-                                    <span>{item.label}</span>
-                                </NavigationMenuTrigger>
-                                <NavigationMenuContent>
-                                    <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                                        {item.children.map((child) => (
-                                            <ListItem
-                                                key={child.label}
-                                                href={child.href}
-                                                title={child.label}
-                                                disabled={child.enabled === false}
-                                            >
-                                                {child.description}
-                                            </ListItem>
-                                        ))}
-                                    </ul>
-                                </NavigationMenuContent>
-                            </NavigationMenuItem>
-                        ) : (
-                            <NavigationMenuItem key={item.label}>
-                                {item.href && item.enabled !== false ? (
-                                    <Link href={item.href} passHref>
-                                        <NavigationMenuLink
-                                            className={navigationMenuTriggerStyle()}
-                                            active={pathname === item.href}
-                                        >
-                                            {item.label}
-                                        </NavigationMenuLink>
-                                    </Link>
-                                ) : (
-                                    <span className={cn(
-                                        navigationMenuTriggerStyle(),
-                                        item.enabled === false && "opacity-50 cursor-not-allowed"
-                                    )}>
-                                        {item.label}
-                                    </span>
+            <div className="flex items-center space-x-1 relative">
+                {navItems.map((item) => (
+                    <div
+                        key={item.label}
+                        className="relative"
+                        onMouseEnter={() => setHoveredItem(item.label)}
+                        onMouseLeave={() => setHoveredItem(null)}
+                    >
+                        {item.href && item.enabled !== false ? (
+                            <Link
+                                href={item.href}
+                                className={cn(
+                                    "relative px-4 py-2 text-sm font-medium transition-colors duration-200 z-10",
+                                    pathname === item.href ? "text-foreground" : "text-muted-foreground hover:text-foreground"
                                 )}
-                            </NavigationMenuItem>
-                        )
-                    )}
-                </NavigationMenuList>
-            </NavigationMenu>
+                            >
+                                {item.label}
+
+                                {/* Active state bubble */}
+                                {pathname === item.href && (
+                                    <motion.div
+                                        layoutId="activeTab"
+                                        className="absolute inset-0 bg-accent rounded-full"
+                                        style={{ zIndex: -1 }}
+                                        transition={{
+                                            type: "spring",
+                                            stiffness: 400,
+                                            damping: 30
+                                        }}
+                                    />
+                                )}
+
+                                {/* Hover state bubble */}
+                                <AnimatePresence>
+                                    {hoveredItem === item.label && pathname !== item.href && (
+                                        <motion.div
+                                            initial={{ opacity: 0, scale: 0.8 }}
+                                            animate={{ opacity: 1, scale: 1 }}
+                                            exit={{ opacity: 0, scale: 0.8 }}
+                                            className="absolute inset-0 bg-accent/50 rounded-full"
+                                            style={{ zIndex: -1 }}
+                                            transition={{
+                                                type: "spring",
+                                                stiffness: 400,
+                                                damping: 30
+                                            }}
+                                        />
+                                    )}
+                                </AnimatePresence>
+                            </Link>
+                        ) : (
+                            <span className={cn(
+                                "px-4 py-2 text-sm font-medium rounded-full",
+                                item.enabled === false && "opacity-50 cursor-not-allowed"
+                            )}>
+                                {item.label}
+                            </span>
+                        )}
+                    </div>
+                ))}
+            </div>
         </div>
     );
 };
@@ -468,7 +119,10 @@ const MobileNav = () => {
                         <span className="sr-only">Toggle Menu</span>
                     </Button>
                 </SheetTrigger>
-                <SheetContent side="left" className="w-full max-w-xs pr-0">
+                <SheetContent
+                    side="left"
+                    className="w-full max-w-xs pr-0 bg-background/80 backdrop-blur-md border"
+                >
                     <div className="p-6 pt-0">
                         <div className="flex items-center justify-between py-4 border-b mb-4">
                             <Logo />
@@ -478,62 +132,30 @@ const MobileNav = () => {
                         <UserProfile variant="mobile" className="mb-4" />
 
                         <nav className="flex flex-col space-y-1">
-                            {navItems.map((item) =>
-                                item.children ? (
-                                    <Accordion key={item.label} type="single" collapsible>
-                                        <AccordionItem value={item.label} className="border-b-0">
-                                            <AccordionTrigger className="flex items-center justify-between rounded-md px-3 py-3 text-base font-medium hover:bg-accent hover:text-accent-foreground transition-colors [&[data-state=open]>svg]:rotate-180">
-                                                <span>{item.label}</span>
-                                            </AccordionTrigger>
-                                            <AccordionContent className="pl-4 pb-0">
-                                                <div className="flex flex-col space-y-1">
-                                                    {item.children.map((child) => (
-                                                        <SheetClose asChild key={child.label}>
-                                                            {child.href && child.enabled !== false ? (
-                                                                <Link
-                                                                    href={child.href}
-                                                                    className={cn(
-                                                                        'block rounded-md px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors'
-                                                                    )}
-                                                                >
-                                                                    {child.label}
-                                                                </Link>
-                                                            ) : (
-                                                                <span className={cn(
-                                                                    'block rounded-md px-3 py-2 text-sm font-medium text-muted-foreground',
-                                                                    child.enabled === false && 'opacity-50 cursor-not-allowed'
-                                                                )}>
-                                                                    {child.label}
-                                                                </span>
-                                                            )}
-                                                        </SheetClose>
-                                                    ))}
-                                                </div>
-                                            </AccordionContent>
-                                        </AccordionItem>
-                                    </Accordion>
-                                ) : (
-                                    <SheetClose asChild key={item.label}>
-                                        {item.href && item.enabled !== false ? (
-                                            <Link
-                                                href={item.href}
-                                                className={cn(
-                                                    'block rounded-md px-3 py-3 text-base font-medium hover:bg-accent hover:text-accent-foreground'
-                                                )}
-                                            >
-                                                {item.label}
-                                            </Link>
-                                        ) : (
-                                            <span className={cn(
-                                                'block rounded-md px-3 py-3 text-base font-medium',
-                                                item.enabled === false && 'opacity-50 cursor-not-allowed'
-                                            )}>
-                                                {item.label}
-                                            </span>
-                                        )}
-                                    </SheetClose>
-                                )
-                            )}
+                            {navItems.map((item) => (
+                                <SheetClose asChild key={item.label}>
+                                    {item.href && item.enabled !== false ? (
+                                        <Link
+                                            href={item.href}
+                                            className={cn(
+                                                'relative block rounded-md px-3 py-3 text-base font-medium transition-colors',
+                                                pathname === item.href
+                                                    ? 'bg-accent text-accent-foreground'
+                                                    : 'hover:bg-accent hover:text-accent-foreground'
+                                            )}
+                                        >
+                                            {item.label}
+                                        </Link>
+                                    ) : (
+                                        <span className={cn(
+                                            'block rounded-md px-3 py-3 text-base font-medium',
+                                            item.enabled === false && 'opacity-50 cursor-not-allowed'
+                                        )}>
+                                            {item.label}
+                                        </span>
+                                    )}
+                                </SheetClose>
+                            ))}
 
                             {/* Mobile Profile Actions */}
                             <MobileProfileActions />
@@ -546,30 +168,36 @@ const MobileNav = () => {
 };
 
 export function Navbar() {
-    const [openPanel, setOpenPanel] = React.useState(false);
-    const [showChat, setShowChat] = React.useState(false);
-
     return (
-        <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-            <div className="container flex h-14 items-center justify-between px-4 md:px-6">
-                {/* Left Aligned Logo */}
-                <div className="flex items-center">
-                    <Logo />
-                </div>
-
-                {/* Centered Desktop Navigation */}
-                <div className="hidden flex-1 justify-center md:flex">
-                    <DesktopNav />
-                </div>
-
-                {/* Right Aligned Controls */}
-                <div className="flex items-center gap-2">
-                    <ThemeToggle />
-                    {/* Desktop Profile Dropdown */}
-                    <div className="hidden md:block">
-                        <UserProfile />
+        <header className="fixed top-0 left-0 right-0 z-50 pointer-events-none">
+            {/* Floating Container */}
+            <div className="flex justify-center pt-4">
+                <div className="flex items-center justify-between bg-background/80 backdrop-blur-md border rounded-full shadow-lg px-4 py-2 mx-4 max-w-6xl w-full pointer-events-auto">
+                    {/* Left Aligned Logo */}
+                    <div className="flex items-center">
+                        <Logo />
                     </div>
-                    <MobileNav />
+
+                    {/* Centered Desktop Navigation */}
+                    <div className="flex-1 justify-center hidden md:flex">
+                        <DesktopNav />
+                    </div>
+
+                    {/* Right Aligned Controls */}
+                    <div className="flex items-center gap-2">
+                        <Button variant="ghost" size="sm" className="hidden md:inline-flex rounded-full">
+                            Log in
+                        </Button>
+                        <Button size="sm" className="hidden md:inline-flex rounded-full bg-foreground text-background hover:bg-foreground/90">
+                            Download
+                        </Button>
+                        <ThemeToggle />
+                        {/* Desktop Profile Dropdown */}
+                        <div className="hidden md:block">
+                            <UserProfile />
+                        </div>
+                        <MobileNav />
+                    </div>
                 </div>
             </div>
         </header>

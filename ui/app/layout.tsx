@@ -1,3 +1,15 @@
+/*
+    _________      .__       _________                __          
+ /   _____/ ____ |__|_____ \_   ___ \____________ _/  |_  ____  
+ \_____  \ /    \|  \____ \/    \  \/\_  __ \__  \\   __\/ __ \ 
+ /        \   |  \  |  |_> >     \____|  | \// __ \|  | \  ___/ 
+/_______  /___|  /__|   __/ \______  /|__|  (____  /__|  \___  >
+        \/     \/   |__|           \/            \/          \/ 
+
+  Collaborative Snippet Repository for Developers
+  https://snipcrate.dev
+  @jsm33t
+*/
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
