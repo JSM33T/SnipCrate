@@ -98,7 +98,7 @@ export default function FeatureCards() {
                         </CardHeader>
                         <CardContent>
                             <motion.div variants={buttonVariants}>
-                                <Button className="w-full" variant="outline">
+                                <Button className="w-full cursor-pointer" variant="outline">
                                     {card.buttonText}
                                 </Button>
                             </motion.div>
